@@ -1,3 +1,13 @@
 .App {
-  text-align: center;
+  display: grid;
+  place-items: center;
+}
+
+.todo_list {
+  display: flex;
+  justify-content: center;
+  border: 1px solid black;
+  align-items: center;
+  width: 800px;
+  margin-bottom: 10px !important;
 }
