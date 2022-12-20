@@ -6,7 +6,8 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
 import { updateDoc,setDoc,query,doc,collection, getDocs,addDoc,deleteDoc,serverTimestamp } from 'firebase/firestore';
 import {ListItem, List, ListItemText} from '@material-ui/core';
-import {db} from './firebase';
+import {db, auth} from './firebase';
+import {RecaptchaVerifier, signInWithPhoneNumber,createUserWithEmailAndPassword,onAuthStateChanged, signInWithEmailAndPassword} from 'firebase/auth';
 
 function App() {
   interface ITodo {
@@ -26,6 +27,26 @@ function App() {
     fetchData();
   }, []);
 
+  const login = async ()=>{
+    // const data = await signInWithEmailAndPassword(auth,'muhammadshahidraficp@gmail.com','Qwerty@123');
+    // console.log(data);
+
+    /* onAuthStateChanged(auth,(user)=>{
+        console.log(user)
+       });
+    */
+    
+    // console.log(auth.currentUser);
+
+
+    /**
+     * const data = await createUserWithEmailAndPassword(auth, 'muhammadshahidraficp@gmail.com', 'Qwerty@123');
+     */
+
+    // const captcha = new RecaptchaVerifier('sign-in-button',{'size':'invisible'},auth);
+    // signInWithPhoneNumber(auth,"+971508776292",captcha);
+  }
+
   async function fetchData(){
     const queryStatement = query(collectionRef)   
     const querySnapshots = await getDocs(queryStatement);
@@ -40,6 +61,7 @@ function App() {
 
   return (
     <div className="App">
+      <Button color='secondary' onClick={login}>Login</Button>
       <h1>Todo List</h1>
       {<ul>{todos.map(todo =>{
           return <List key={todo.title} className="todo_list" >
